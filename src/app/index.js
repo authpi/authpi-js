@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import boom from 'express-boom';
+import cors from 'cors';
 
 import config from '../config';
 const app = express();
@@ -11,6 +12,9 @@ app.use(bodyParser.json());
 
 // use boom error object
 app.use(boom());
+
+// allow request from all origins (temporary for this demo only)
+app.use(cors());
 
 import authentication from './authentication';
 authentication.init(app);

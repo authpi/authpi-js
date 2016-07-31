@@ -11,7 +11,7 @@ const schema = new Schema({
     lastName: String,
     company: String,
     categories: String,
-    address: String,
+    address1: String,
     address2: String,
     phone: String,
   },

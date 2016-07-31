@@ -9,20 +9,20 @@ export function addUser({ email, password }) {
 
 export function authUser({ email, password }) {
   return new Promise((resolve, reject) => {
-    const findUserByEmail = User.findOne({ email });
-    findUserByEmail.then(user => {
-      console.log('Found User', user._id);
-      const verifyPassword = pw.verify(user.password, password);
-      verifyPassword.then(isValid => {
-        console.log('Verify Password', isValid);
-        if (!isValid) {
-          reject(new Error('Invalid Password'));
-        }
-        resolve(user);
-      });
-      verifyPassword.catch(err => reject(err));
-    });
-    findUserByEmail.catch(err => reject(err));
+    User.findOne({ email })
+      .then(user => {
+        console.log('Found User', user._id);
+        const verifyPassword = pw.verify(user.password, password);
+        verifyPassword.then(isValid => {
+          console.log('Verify Password', isValid);
+          if (!isValid) {
+            reject(new Error('Invalid Password'));
+          }
+          resolve(user);
+        });
+        verifyPassword.catch(err => reject(err));
+      })
+      .catch(err => reject(err));
   });
 }
 
@@ -38,8 +38,8 @@ export function updateProfile(email, data) {
 
 export function getProfile(email) {
   return new Promise((resolve, reject) => {
-    const findUserByEmail = User.findOne({ email });
-    findUserByEmail.then(user => resolve(user.profile));
-    findUserByEmail.catch(err => reject(err));
+    User.findOne({ email })
+      .then(user => resolve(user.profile))
+      .catch(err => reject(err));
   });
 }

@@ -61,7 +61,7 @@ function handleLogin(req, res) {
 }
 
 function handleUpdateProfile(req, res) {
-  const data = pick(req.body, ['firstName', 'lastName', 'company', 'categories', 'address', 'address2', 'phone']);
+  const data = pick(req.body, ['firstName', 'lastName', 'company', 'categories', 'address1', 'address2', 'phone']);
   return updateProfile(req.user.email, data)
     .then(user => res.json(user.profile))
     .catch(() => res.boom.badImplementation());
