@@ -1,0 +1,56 @@
+{
+  "name": "cyzapi",
+  "version": "1.0.1",
+  "private": "true",
+  "description": "Cyza API",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-register",
+    "start": "nodemon src/index.js --exec babel-node src/index.js",
+    "build": "babel src -d dist",
+    "build:dev": "babel src -d dist --source-maps inline",
+    "serve": "node dist/index.js",
+    "debug": "npm run build:dev && node-debug dist/index.js",
+    "lint": "eslint src"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "repository": "longseespace/cyzapi",
+  "author": {
+    "name": "Long Nguyen",
+    "email": "long@nomadreact.com",
+    "url": "https://github.com/longseespace"
+  },
+  "files": [
+    "dist/*",
+    "README.md",
+    "LICENCE"
+  ],
+  "dependencies": {
+    "body-parser": "1.15.1",
+    "credential": "^1.0.0",
+    "express": "4.13.4",
+    "express-boom": "^1.0.0",
+    "express-handlebars": "3.0.0",
+    "jsonwebtoken": "^7.1.7",
+    "lodash": "^4.14.1",
+    "mongoose": "^4.5.7",
+    "passport": "0.3.2",
+    "passport-jwt": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-eslint": "^6.1.2",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-register": "^6.11.6",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^1.5.5",
+    "eslint-plugin-react": "^5.2.2",
+    "mocha": "^2.5.3",
+    "nodemon": "^1.10.0"
+  }
+}
