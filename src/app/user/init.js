@@ -61,7 +61,6 @@ function handleLogin(req, res) {
 }
 
 function handleUpdateProfile(req, res) {
-  console.log(req.body);
   const data = pick(req.body, ['firstName', 'lastName', 'company', 'categories', 'address', 'address2', 'phone']);
   return updateProfile(req.user.email, data)
     .then(user => res.json(user.profile))

@@ -5,9 +5,9 @@ Cyza API server
 1. `git clone git@github.com:longseespace/cyzapi.git`
 2. `cd cyzapi`
 3. `npm install`
-4. `export MONGO_STORE_URI=<mongodb_uri>`
-   `export MONGO_STORE_SECRET=<victoria_secret>`
-   `export AUTH_SECRET=<victoria_secret>`
+4. `export MONGO_STORE_URI=<mongodb_uri>`  
+   `export MONGO_STORE_SECRET=<victoria_secret>`  
+   `export AUTH_SECRET=<victoria_secret>`  
 
 ## Development
 * `npm start`
