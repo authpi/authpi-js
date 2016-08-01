@@ -38,10 +38,13 @@ user.init(app);
 // eslint-disable-next-line no-unused-vars
 function errorHandler(err, req, res, next) {
   // sadly, cannot use `boom` here :(
-  res.status(501).json({
-    statusCode: 501,
-    error: 'Not Implemented',
+  res.status(500).json({
+    statusCode: 500,
+    error: 'Server Internal Error',
   });
+
+  // in production, send this error to a log services (sentry, maybe)
+  console.error(err);
 }
 app.use(errorHandler);
 
