@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
+  provider: String,
   email: { type: String, required: true, unique: true },
   displayName: String,
   password: String,

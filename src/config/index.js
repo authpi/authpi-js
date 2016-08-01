@@ -1,16 +1,9 @@
-const config = {};
+import mongoStore from './mongostore';
+import auth from './auth';
+import server from './server';
 
-config.mongoStore = {
-  url: process.env.MONGO_STORE_URI || 'mongodb://localhost:27017/cyza',
-  secret: process.env.MONGO_STORE_SECRET || 'LJPSWW6JJWmTGfR2BmfuD77BUKhhnmy5',
+export default {
+  mongoStore,
+  auth,
+  server,
 };
-
-config.auth = {
-  secret: process.env.AUTH_SECRET || 'aRjXbyzSfzva3NMBx23GZX8KwGS2NbZy',
-};
-
-config.server = {
-  port: process.env.PORT || 3000,
-};
-
-export default config;
