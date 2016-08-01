@@ -7,7 +7,7 @@ describe('Login User', () => {
   before(done => removeAllUsers().then(addTestUser).then(done));
   it('logs user in and returns JWT token', () =>
     request
-      .post('http://localhost:3000/users/login', testUser)
+      .post('http://localhost:3001/users/login', testUser)
       .then(response => {
         assert.equal(response.response.statusCode, 200);
         assert.property(response.body, 'id');
@@ -16,7 +16,7 @@ describe('Login User', () => {
   );
   it('returns error if creds are incorrect', () =>
     request
-      .post('http://localhost:3000/users/login', {
+      .post('http://localhost:3001/users/login', {
         email: 'test@test.com',
         password: '123',
       })

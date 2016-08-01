@@ -20,6 +20,7 @@
     "start:test": {
       "command": "babel-node src/index.js",
       "env": {
+        "PORT": 3001,
         "NODE_ENV": "test",
         "MONGO_STORE_URI": "mongodb://localhost:27017/cyza_test",
         "MONGO_STORE_SECRET": "LJPSWW6JJWmTGfR2BmfuD77BUKhhnmy5",
@@ -29,6 +30,7 @@
     "test": {
       "command": "mocha --compilers js:babel-register --reporter spec './src/**/*.spec.js'",
       "env": {
+        "PORT": 3001,
         "NODE_ENV": "test",
         "MONGO_STORE_URI": "mongodb://localhost:27017/cyza_test",
         "MONGO_STORE_SECRET": "LJPSWW6JJWmTGfR2BmfuD77BUKhhnmy5",
@@ -38,6 +40,7 @@
     "test:watch": {
       "command": "mocha --watch --compilers js:babel-register --reporter spec './src/**/*.spec.js'",
       "env": {
+        "PORT": 3001,
         "NODE_ENV": "test",
         "MONGO_STORE_URI": "mongodb://localhost:27017/cyza_test",
         "MONGO_STORE_SECRET": "LJPSWW6JJWmTGfR2BmfuD77BUKhhnmy5",
