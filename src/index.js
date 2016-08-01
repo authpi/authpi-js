@@ -1,10 +1,10 @@
 import app from './app';
-const port = process.env.PORT || 3000;
+import config from './config';
 
-app.listen(port, (err) => {
+app.listen(config.server.port, (err) => {
   if (err) {
     throw err;
   }
 
-  console.log(`server is listening on ${port}...`);
+  console.log(`server is listening on ${config.server.port}...`);
 });

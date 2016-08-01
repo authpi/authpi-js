@@ -6,12 +6,9 @@ import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import authenticationMiddleware from './middleware';
 
 function lookupUser(payload, done) {
-  User.findOne({ email: payload.email }, (err, user) => {
-    if (err) {
-      return done(err, false);
-    }
-    return done(null, user);
-  });
+  User.findOne({ email: payload.email })
+    .then(user => done(null, user))
+    .catch(err => done(err, false));
 }
 
 function initPassport() {
