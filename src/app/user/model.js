@@ -10,7 +10,7 @@ const schema = new Schema({
     firstName: String,
     lastName: String,
     company: String,
-    categories: String,
+    categories: [String],
     address1: String,
     address2: String,
     phone: String,
