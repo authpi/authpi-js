@@ -9,7 +9,7 @@ import {
   authUser,
   getProfile,
   updateProfile,
-  createResetPasswordToken,
+  resetPassword,
 } from './controller';
 import { sendPasswordRecoveryEmail } from '../email';
 
@@ -72,15 +72,41 @@ export function handleGetProfile(req, res) {
     .catch(() => res.boom.badImplementation());
 }
 
+// I found this approach is more secure.
+// However, for fast development of this demo, I decided to send new password directly to the user
+// export function handleResetPassword(req, res) {
+//   if (isEmpty(req.body.email)) {
+//     return res.boom.badRequest('Invalid Email');
+//   }
+//   // currently, there is no mechanism to invalidate this token
+//   // in production, ideally use a cron job to invalidate this token after 24hrs
+//   return createResetPasswordToken(req.body.email)
+//     .then(user =>
+//       sendPasswordRecoveryEmail({ email: user.email, displayName: user.displayName, code: user.resetPasswordToken })
+//         .then(() => res.json({ success: true }))
+//         .catch(err => res.boom.badImplementation(err.message))
+//     )
+//     .catch(err => {
+//       if (err instanceof Error) {
+//         return res.boom.badRequest(err.message);
+//       }
+//       return res.boom.badImplementation(err.message);
+//     });
+// }
+
 export function handleResetPassword(req, res) {
   if (isEmpty(req.body.email)) {
     return res.boom.badRequest('Invalid Email');
   }
-  return createResetPasswordToken(req.body.email)
-    .then(user =>
-      sendPasswordRecoveryEmail({ email: user.email, displayName: user.displayName, code: user.resetPasswordToken })
-        .then(() => res.json({ success: true }))
-        .catch(err => res.boom.badImplementation(err.message))
+  return resetPassword(req.body.email)
+    .then(({ user, newPassword }) =>
+      sendPasswordRecoveryEmail({
+        email: user.email,
+        displayName: user.displayName,
+        password: newPassword,
+      })
+      .then(() => res.json({ success: true }))
+      .catch(err => res.boom.badImplementation(err.message))
     )
     .catch(err => {
       if (err instanceof Error) {

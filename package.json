@@ -12,6 +12,7 @@
     "build:dev": "babel src -d dist --source-maps inline",
     "serve": "node dist/index.js",
     "debug": "npm run build:dev && node-debug dist/index.js",
+    "pretest": "npm run lint",
     "test": "better-npm-run test",
     "test:watch": "better-npm-run test:watch",
     "lint": "eslint src"

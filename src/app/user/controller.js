@@ -79,3 +79,48 @@ export function createResetPasswordToken(email) {
       .catch(reject);
   });
 }
+
+export function resetPasswordForCode(code) {
+  return new Promise((resolve, reject) => {
+    User.findOne({ resetPasswordToken: code })
+      .then(user => {
+        if (!user) {
+          return reject(new Error('Invalid or Expired Code'));
+        }
+
+        const newPassword = randtoken.generate(8);
+        return pw.hash(newPassword).then(hash => {
+          delete user.resetPasswordToken;
+          user.password = hash;
+          user.save((err => {
+            if (err) {
+              return reject(err);
+            }
+            return resolve(newPassword);
+          }));
+        });
+      })
+      .catch(reject);
+  });
+}
+
+export function resetPassword(email) {
+  return new Promise((resolve, reject) =>
+    User.findOne({ email })
+      .then(user => {
+        if (!user) {
+          return reject(new Error('Email Not Found'));
+        }
+        const newPassword = randtoken.generate(8);
+        return pw.hash(newPassword).then(hash => {
+          user.password = hash;
+          user.save((err => {
+            if (err) {
+              return reject(err);
+            }
+            return resolve({ user, newPassword });
+          }));
+        });
+      })
+      .catch(reject));
+}

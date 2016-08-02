@@ -2,9 +2,11 @@ import handlebars from 'handlebars';
 
 const plainSource = `Hi {{displayName}},
 
-Please find new password for your Cyza account below:
+Someone recently requested a password change for your Cyza account.
+If this was you, please follow the link below to reset your password.
+The link will remain valid for 24 hours.
 
-{{password}}
+{{recoveryUrl}}
 
 Thanks!
 - The Cyza Team
@@ -15,9 +17,13 @@ const htmlSource = `<html>
 <body>
   Hi {{displayName}},
   <br/><br/>
-  Please find new password for your Cyza account below:
+  Someone recently requested a password change for your Cyza account.
+  <br/>
+  If this was you, please follow the link below to reset your password.
+  <br/>
+  The link will remain valid for 24 hours.
   <br/><br/>
-  <pre>{{password}}</pre>
+  <a href='{{recoveryUrl}}'>Reset Password</a>
   <br/><br/>
   Thanks!
   <br/>

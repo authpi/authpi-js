@@ -4,14 +4,14 @@ import config from '../../config';
 const mailer = mailgun(config.email);
 import templates from './templates';
 
-export function sendPasswordRecoveryEmail({ email, displayName = '', code }) {
+export function sendPasswordRecoveryEmail({ email, displayName = '', password }) {
   const context = {
     displayName,
     email,
-    recoveryUrl: `${config.server.recoverPasswordUrl}?code=${code}`,
+    password,
   };
-  const text = templates.resetpassword.plain(context);
-  const html = templates.resetpassword.html(context);
+  const text = templates.resetPassword.plain(context);
+  const html = templates.resetPassword.html(context);
 
   const mailcomposer = new MailComposer({
     from: 'Cyza Inc. <noreply@nomadreact.com>',
