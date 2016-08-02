@@ -1,4 +1,4 @@
-import resetPassword from './resetPassword';
+import resetPassword from './reset-password';
 
 export default {
   resetPassword,
