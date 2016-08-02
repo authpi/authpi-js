@@ -1,4 +1,5 @@
 import User from './model';
+import randtoken from 'rand-token';
 import credential from 'credential';
 const pw = credential();
 
@@ -60,5 +61,21 @@ export function getProfile(id) {
     User.findById(id)
       .then(user => resolve(user.profile))
       .catch(err => reject(err));
+  });
+}
+
+export function createResetPasswordToken(email) {
+  return new Promise((resolve, reject) => {
+    User.findOne({ email })
+      .then(user => {
+        if (!user) {
+          return reject(new Error('Email Not Found'));
+        }
+        user.resetPasswordToken = randtoken.generate(16);
+        return user.save()
+          .then(resolve)
+          .catch(reject);
+      })
+      .catch(reject);
   });
 }

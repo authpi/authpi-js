@@ -4,6 +4,7 @@ import {
   handleRegister,
   handleGetProfile,
   handleUpdateProfile,
+  handleResetPassword,
 } from './routes';
 
 function initUser(app) {
@@ -11,6 +12,7 @@ function initUser(app) {
   app.post('/users/register', handleRegister);
   app.get('/users/profile', passport.jwtMiddleware(), handleGetProfile);
   app.post('/users/profile', passport.jwtMiddleware(), handleUpdateProfile);
+  app.post('/users/resetpassword', handleResetPassword);
 }
 
 export default initUser;

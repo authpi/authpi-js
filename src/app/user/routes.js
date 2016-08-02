@@ -9,7 +9,9 @@ import {
   authUser,
   getProfile,
   updateProfile,
+  createResetPasswordToken,
 } from './controller';
+import { sendPasswordRecoveryEmail } from '../email';
 
 export function handleRegister(req, res) {
   if (isEmpty(req.body.email) || isEmpty(req.body.password)) {
@@ -70,6 +72,20 @@ export function handleGetProfile(req, res) {
     .catch(() => res.boom.badImplementation());
 }
 
-export function handleLoginLinkedIn() {
-  //
+export function handleResetPassword(req, res) {
+  if (isEmpty(req.body.email)) {
+    return res.boom.badRequest('Invalid Email');
+  }
+  return createResetPasswordToken(req.body.email)
+    .then(user =>
+      sendPasswordRecoveryEmail({ email: user.email, displayName: user.displayName, code: user.resetPasswordToken })
+        .then(() => res.json({ success: true }))
+        .catch(err => res.boom.badImplementation(err.message))
+    )
+    .catch(err => {
+      if (err instanceof Error) {
+        return res.boom.badRequest(err.message);
+      }
+      return res.boom.badImplementation(err.message);
+    });
 }

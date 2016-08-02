@@ -22,9 +22,9 @@ function linkedLogedIn(req, res) {
       }, config.auth.secret, {
         expiresIn: '7d',
       });
-      res.redirect(`http://localhost:4200/welcome/auth/login?token=${token}`);
+      res.redirect(`${config.linkedin.callbackUrl}?token=${token}`);
     })
-    .catch(err => res.redirect(`http://localhost:4200/welcome/auth/login?error=${err.message}`));
+    .catch(err => res.redirect(`${config.linkedIn.callbackUrl}?error=${err.message}`));
 }
 
 function linkedInMiddleware() {
