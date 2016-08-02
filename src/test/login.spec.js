@@ -2,7 +2,7 @@ import request from 'chakram';
 import { assert } from 'chai';
 import { testUser, removeAllUsers, addTestUser } from './helpers';
 
-describe('Login User', () => {
+describe('Login', () => {
   // clean collection and add a test user
   before(done => removeAllUsers().then(addTestUser).then(done));
   it('logs user in and returns JWT token', () =>

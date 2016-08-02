@@ -62,13 +62,13 @@ export function handleLogin(req, res) {
 export function handleUpdateProfile(req, res) {
   const data = pick(req.body, ['firstName', 'lastName', 'company', 'categories', 'address1', 'address2', 'phone']);
   return updateProfile(req.user.id, data)
-    .then(user => res.json(user.profile))
+    .then(user => res.json(user))
     .catch(() => res.boom.badImplementation());
 }
 
 export function handleGetProfile(req, res) {
   return getProfile(req.user.id)
-    .then(profile => res.json(profile))
+    .then(user => res.json(user))
     .catch(() => res.boom.badImplementation());
 }
 

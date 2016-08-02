@@ -59,8 +59,8 @@ export function updateProfile(id, data) {
 export function getProfile(id) {
   return new Promise((resolve, reject) => {
     User.findById(id)
-      .then(user => resolve(user.profile))
-      .catch(err => reject(err));
+      .then(resolve)
+      .catch(reject);
   });
 }
 

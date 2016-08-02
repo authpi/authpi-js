@@ -11,4 +11,5 @@ install:
 before_script:
   - nohup bash -c "npm run start:test 2>&1 &" && sleep 3
 script:
+  - npm run lint
   - npm test

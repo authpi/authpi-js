@@ -2,7 +2,7 @@ import request from 'chakram';
 import { assert } from 'chai';
 import { removeAllUsers, testUser } from './helpers';
 
-describe('Register New User', () => {
+describe('Register New User:', () => {
   before(done => removeAllUsers().then(done));
   it('adds new user and returns JWT token', () =>
     request.post('http://localhost:3001/users/register', testUser)

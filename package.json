@@ -7,18 +7,17 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node src/index.js",
-    "start:test": "better-npm-run start:test",
     "build": "babel src -d dist",
     "build:dev": "babel src -d dist --source-maps inline",
     "serve": "node dist/index.js",
     "debug": "npm run build:dev && node-debug dist/index.js",
-    "pretest": "npm run lint",
+    "test:server": "better-npm-run test:server",
     "test": "better-npm-run test",
     "test:watch": "better-npm-run test:watch",
     "lint": "eslint src"
   },
   "betterScripts": {
-    "start:test": {
+    "test:server": {
       "command": "babel-node src/index.js",
       "env": {
         "PORT": 3001,
