@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node src/index.js",
+    "start": "npm run build && npm run serve",
+    "dev": "nodemon src/index.js --exec babel-node src/index.js",
     "build": "babel src -d dist",
     "build:dev": "babel src -d dist --source-maps inline",
     "serve": "node dist/index.js",
