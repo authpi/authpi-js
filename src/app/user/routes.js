@@ -18,7 +18,6 @@ export function handleRegister(req, res) {
   return addUser(pick(req.body, ['email', 'password']))
     .then(user => {
       const token = jwt.sign({
-        email: user.email,
         id: user._id,
       }, config.auth.secret, {
         expiresIn: '7d',
@@ -41,7 +40,6 @@ export function handleLogin(req, res) {
   return authUser(pick(req.body, ['email', 'password']))
     .then(user => {
       const token = jwt.sign({
-        email: user.email,
         id: user._id,
       }, config.auth.secret, {
         expiresIn: '7d',
@@ -61,13 +59,13 @@ export function handleLogin(req, res) {
 
 export function handleUpdateProfile(req, res) {
   const data = pick(req.body, ['firstName', 'lastName', 'company', 'categories', 'address1', 'address2', 'phone']);
-  return updateProfile(req.user.email, data)
+  return updateProfile(req.user.id, data)
     .then(user => res.json(user.profile))
     .catch(() => res.boom.badImplementation());
 }
 
 export function handleGetProfile(req, res) {
-  return getProfile(req.user.email)
+  return getProfile(req.user.id)
     .then(profile => res.json(profile))
     .catch(() => res.boom.badImplementation());
 }

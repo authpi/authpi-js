@@ -32,10 +32,8 @@ export function authUser({ email, password }) {
   return new Promise((resolve, reject) => {
     User.findOne({ email })
       .then(user => {
-        console.log('Found User', user._id);
         const verifyPassword = pw.verify(user.password, password);
         verifyPassword.then(isValid => {
-          console.log('Verify Password', isValid);
           if (!isValid) {
             reject(new Error('Invalid Password'));
           }
@@ -47,19 +45,19 @@ export function authUser({ email, password }) {
   });
 }
 
-export function updateProfile(email, data) {
+export function updateProfile(id, data) {
   // we don't pick any particular fields here since the profile fields can be dynamic
   // if any data white listing needed, it should be done at a higher level
   // so for now, this is a dumb save() method call
-  return User.findOne({ email }).then(user => {
+  return User.findById(id).then(user => {
     user.profile = data;
     return user.save();
   });
 }
 
-export function getProfile(email) {
+export function getProfile(id) {
   return new Promise((resolve, reject) => {
-    User.findOne({ email })
+    User.findById(id)
       .then(user => resolve(user.profile))
       .catch(err => reject(err));
   });
