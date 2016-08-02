@@ -1,19 +1,36 @@
 import passport from 'passport';
+import jwt from 'jsonwebtoken';
 import config from '../../config';
 import { Strategy as LinkedInStrategy } from 'passport-linkedin';
+import { findOrCreateLinkedInUser } from '../user';
 
 function linkedinVerify(token, tokenSecret, profile, done) {
   done(null, { token, tokenSecret, profile });
 }
 
 function linkedLogedIn(req, res) {
-  console.log('rerer', req.user);
-  res.json(req.user);
+  const params = {
+    linkedInId: req.user.profile.id,
+    displayName: req.user.profile.displayName,
+    firstName: req.user.profile.name.givenName,
+    lastName: req.user.profile.name.familyName,
+  };
+  findOrCreateLinkedInUser(params)
+    .then(user => {
+      const token = jwt.sign({
+        id: user._id,
+      }, config.auth.secret, {
+        expiresIn: '7d',
+      });
+      res.redirect(`http://localhost:4200/welcome/auth/login?token=${token}`);
+    })
+    .catch(err => res.redirect(`http://localhost:4200/welcome/auth/login?error=${err.message}`));
 }
 
 function linkedInMiddleware() {
   return (req, res, next) =>
     passport.authenticate('linkedin', (err, user) => {
+      req.user = user;
       next(err, user);
     })(req, res, next);
 }

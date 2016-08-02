@@ -1,11 +1,15 @@
 import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
+  linkedInId: { type: String, unique: true },
   provider: String,
-  email: { type: String, required: true, unique: true },
+  email: { type: String, unique: true },
   displayName: String,
   password: String,
-  linkedinData: Schema.Types.Mixed,
+  credential: {
+    token: String,
+    tokenSecret: String,
+  },
   createdAt: Date,
   profile: {
     firstName: String,
@@ -19,7 +23,7 @@ const schema = new Schema({
   resetPasswordToken: String,
 });
 
-schema.index({ email: 1 });
+schema.index({ email: 1, linkedInId: 1 });
 
 const Model = mongoose.model('User', schema);
 

@@ -7,6 +7,27 @@ export function addUser({ email, password }) {
   return pw.hash(password).then(hash => User.create({ email, password: hash }));
 }
 
+export function findOrCreateLinkedInUser({ linkedInId, displayName, firstName, lastName }) {
+  return new Promise((resolve, reject) =>
+    User.findOne({ linkedInId }).exec((err, user) => {
+      if (err) {
+        return reject(err);
+      }
+      if (!user) {
+        return User.create({
+          linkedInId,
+          displayName,
+          profile: {
+            firstName,
+            lastName,
+          },
+        }).then(resolve).catch(reject);
+      }
+      return resolve(user);
+    })
+  );
+}
+
 export function authUser({ email, password }) {
   return new Promise((resolve, reject) => {
     User.findOne({ email })
