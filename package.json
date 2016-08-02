@@ -7,7 +7,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node src/index.js",
-    "heroku": "npm run build && MONGO_STORE_URI=${MONGODB_URI} npm run serve",
+    "heroku": "npm run build && better-npm-run heroku",
     "build": "babel src -d dist",
     "build:dev": "babel src -d dist --source-maps inline",
     "serve": "node dist/index.js",
@@ -18,6 +18,15 @@
     "lint": "eslint src"
   },
   "betterScripts": {
+    "heroku": {
+      "command": "node dist/index.js",
+      "env": {
+        "MONGO_STORE_URI": "mongodb://heroku_shmdctll:ccip3rl5t4kr6mf7g991u9852e@ds139705.mlab.com:39705/heroku_shmdctll",
+        "RECOVER_PASSWORD_URL": "https://cyzapp.herokuapp.com/welcome/auth/password",
+        "LINKEDIN_LOGIN_REDIRECT_URL": "https://cyzapp.herokuapp.com/welcome/auth/login",
+        "LINKEDIN_REGISTER_REDIRECT_URL": "https://cyzapp.herokuapp.com/welcome/auth/register"
+      }
+    },
     "test:server": {
       "command": "babel-node src/index.js",
       "env": {
