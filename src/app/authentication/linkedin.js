@@ -42,7 +42,7 @@ export function initLinkedIn(app) {
   passport.use(new LinkedInStrategy({
     consumerKey: config.linkedin.apiKey,
     consumerSecret: config.linkedin.apiSecret,
-    callbackURL: `http://${config.server.host}:${config.server.port}/auth/linkedin/callback`,
+    callbackURL: config.linkedin.callbackUrl,
     profileFields: ['id', 'first-name', 'last-name', 'email-address', 'headline'],
   }, linkedinVerify));
 
