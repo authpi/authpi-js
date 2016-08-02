@@ -9,8 +9,8 @@ import {
 function initUser(app) {
   app.post('/users/login', handleLogin);
   app.post('/users/register', handleRegister);
-  app.get('/users/profile', passport.authenticationMiddleware(), handleGetProfile);
-  app.post('/users/profile', passport.authenticationMiddleware(), handleUpdateProfile);
+  app.get('/users/profile', passport.jwtMiddleware(), handleGetProfile);
+  app.post('/users/profile', passport.jwtMiddleware(), handleUpdateProfile);
 }
 
 export default initUser;

@@ -3,6 +3,9 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 import boom from 'express-boom';
 import cors from 'cors';
+import session from 'express-session';
+import connectMongo from 'connect-mongo';
+const MongoStore = connectMongo(session);
 
 import config from '../config';
 const app = express();
@@ -16,12 +19,19 @@ app.use(boom());
 // allow request from all origins (temporary for this demo only)
 app.use(cors());
 
-import authentication from './authentication';
-authentication.init(app);
-
 // connect to mongodb
 import mongoose from 'mongoose';
 mongoose.connect(config.mongoStore.url);
+
+// support session
+app.use(session({
+  ...config.session,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+}));
+
+
+import authentication from './authentication';
+authentication.init(app);
 
 // use es6 Promise (or from babel polyfill, whatever)
 // @see http://mongoosejs.com/docs/promises.html
