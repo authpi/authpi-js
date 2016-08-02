@@ -3,8 +3,8 @@ import config from '../../config';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import User from '../user/model';
 
-function jwtVerify(payload, done) {
-  User.findOne({ email: payload.email })
+function jwtVerify({ id }, done) {
+  User.findById(id)
     .then(user => done(null, user))
     .catch(err => done(err, false));
 }
