@@ -16,15 +16,18 @@ function linkedLogedIn(req, res) {
     lastName: req.user.profile.name.familyName,
   };
   findOrCreateLinkedInUser(params)
-    .then(user => {
+    .then(({ user, isNew }) => {
       const token = jwt.sign({
         id: user._id,
       }, config.auth.secret, {
         expiresIn: '7d',
       });
-      res.redirect(`${config.linkedin.callbackUrl}?token=${token}`);
+      const redirectUrl = isNew ?
+        `${config.linkedin.registerRedirectUrl}?token=${token}` :
+        `${config.linkedin.loginRedirectUrl}?token=${token}`;
+      res.redirect(redirectUrl);
     })
-    .catch(err => res.redirect(`${config.linkedIn.callbackUrl}?error=${err.message}`));
+    .catch(err => res.redirect(`${config.linkedIn.loginRedirectUrl}?error=${err.message}`));
 }
 
 function linkedInMiddleware() {

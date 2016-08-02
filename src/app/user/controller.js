@@ -22,9 +22,11 @@ export function findOrCreateLinkedInUser({ linkedInId, displayName, firstName, l
             firstName,
             lastName,
           },
-        }).then(resolve).catch(reject);
+        })
+        .then(doc => resolve({ user: doc, isNew: true }))
+        .catch(reject);
       }
-      return resolve(user);
+      return resolve({ user, isNew: false });
     })
   );
 }
