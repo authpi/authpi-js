@@ -1,9 +1,9 @@
 import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
-  linkedInId: { type: String, unique: true },
+  username: { type: String, unique: true },
   provider: String,
-  email: { type: String, unique: true },
+  email: { type: String },
   displayName: String,
   password: String,
   credential: {
@@ -23,7 +23,7 @@ const schema = new Schema({
   resetPasswordToken: String,
 });
 
-schema.index({ email: 1, linkedInId: 1 });
+schema.index({ email: 1, username: 1 });
 
 const Model = mongoose.model('User', schema);
 

@@ -18,4 +18,11 @@ describe('Register New User:', () => {
         assert.notEqual(response.response.statusCode, 200);
       })
   );
+  // bug @ index
+  it('adds another user and returns JWT token', () =>
+    request.post('http://localhost:3001/users/register', { email: 'test2@test.com', password: 'test' })
+      .then(response => {
+        assert.equal(response.response.statusCode, 200);
+      })
+  );
 });

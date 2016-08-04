@@ -5,7 +5,7 @@ const pw = credential();
 
 // return Promise
 export function addUser({ email, password }) {
-  return pw.hash(password).then(hash => User.create({ email, password: hash }));
+  return pw.hash(password).then(hash => User.create({ username: email, email, password: hash }));
 }
 
 export function findOrCreateLinkedInUser({ linkedInId, displayName, firstName, lastName }) {
@@ -16,7 +16,7 @@ export function findOrCreateLinkedInUser({ linkedInId, displayName, firstName, l
       }
       if (!user) {
         return User.create({
-          linkedInId,
+          username: linkedInId,
           displayName,
           profile: {
             firstName,
