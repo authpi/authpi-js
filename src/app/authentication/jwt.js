@@ -15,7 +15,7 @@ export function jwtMiddleware() {
 
 export function initJwt() {
   passport.use(new JwtStrategy({
-    jwtFromRequest: ExtractJwt.fromAuthHeader(),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
     secretOrKey: config.auth.secret,
   }, jwtVerify));
   passport.jwtMiddleware = jwtMiddleware;

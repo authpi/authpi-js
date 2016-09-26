@@ -40,7 +40,7 @@ describe('User Profile', () => {
           lastName: 'Bot',
         }, {
           headers: {
-            Authorization: `JWT ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then(response => {
@@ -53,7 +53,7 @@ describe('User Profile', () => {
       request
         .get('http://localhost:3001/users/profile', {
           headers: {
-            Authorization: `JWT ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then(response => {

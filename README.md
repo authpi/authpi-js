@@ -1,12 +1,11 @@
-# cyzapi
+# AuthPI in JavaScript
 Simple authentication API server
 
-[![Build Status](https://travis-ci.org/longseespace/cyzapi.svg?branch=master)](https://travis-ci.org/longseespace/cyzapi)
-[![npm](https://img.shields.io/npm/v/npm.svg?maxAge=2592000)](https://www.npmjs.com/package/cyzapi)
+[![Build Status](https://travis-ci.org/authpi/authpi-js.svg?branch=master)](https://travis-ci.org/authpi/authpi-js)
 
 ## Installation
-1. `git clone git@github.com:longseespace/cyzapi.git`
-2. `cd cyzapi`
+1. `git clone git@github.com:authpi/authpi-js.git`
+2. `cd authpi-js`
 3. `npm install`
 4. `export MONGO_STORE_URI=<mongodb_uri>`  
    `export MONGO_STORE_SECRET=<victoria_secret>`  
@@ -27,4 +26,4 @@ Simple authentication API server
 * `npm run debug`
 
 ## Test
-* `npm run test`
+* `npm test`

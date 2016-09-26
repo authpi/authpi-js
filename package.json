@@ -1,8 +1,7 @@
 {
-  "name": "cyzapi",
-  "version": "1.0.2",
-  "private": "true",
-  "description": "Cyza API",
+  "name": "authpi-js",
+  "version": "0.1.0",
+  "description": "AuthPI in JavaScript (NodeJS)",
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +12,9 @@
     "serve": "node dist/index.js",
     "debug": "npm run build:dev && node-debug dist/index.js",
     "test:server": "better-npm-run test:server",
+    "pretest": "better-npm-run test:server & 2> /dev/null",
     "test": "better-npm-run test",
+    "posttest": "pid=$(lsof -i:3001 -t); kill -TERM $pid || kill -KILL $pid",
     "test:watch": "better-npm-run test:watch",
     "lint": "eslint src"
   },
