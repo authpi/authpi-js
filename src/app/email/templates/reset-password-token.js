@@ -2,14 +2,14 @@ import handlebars from 'handlebars';
 
 const plainSource = `Hi {{displayName}},
 
-Someone recently requested a password change for your Cyza account.
+Someone recently requested a password change for your AuthPI account.
 If this was you, please follow the link below to reset your password.
 The link will remain valid for 24 hours.
 
 {{recoveryUrl}}
 
 Thanks!
-- The Cyza Team
+- The AuthPI Team
 
 This e-mail has been generated automatically. Please, do not reply to this message.`;
 
@@ -27,7 +27,7 @@ const htmlSource = `<html>
   <br/><br/>
   Thanks!
   <br/>
-  - The Cyza Team
+  - The AuthPI Team
   <br/><br/>
   <i>This e-mail has been generated automatically. Please, do not reply to this message.</i>
 </body>

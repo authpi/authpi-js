@@ -14,9 +14,9 @@ export function sendPasswordRecoveryEmail({ email, displayName = '', password })
   const html = templates.resetPassword.html(context);
 
   const mailcomposer = new MailComposer({
-    from: 'Cyza Inc. <noreply@nomadreact.com>',
+    from: config.email.from,
     to: `${displayName} <${email}>`,
-    subject: 'Cyza Password Reset',
+    subject: `${config.email.brand} Password Reset`,
     text,
     html,
   });

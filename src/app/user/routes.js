@@ -29,8 +29,7 @@ export function handleRegister(req, res) {
         token,
       });
     })
-    .catch(err => {
-      console.error(err);
+    .catch(() => {
       res.boom.conflict('Duplicated Email');
     });
 }
@@ -53,8 +52,7 @@ export function handleLogin(req, res) {
         token,
       });
     })
-    .catch(err => {
-      console.error(err);
+    .catch(() => {
       res.boom.badRequest('Invalid Email/Password');
     });
 }

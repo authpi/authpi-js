@@ -7,8 +7,13 @@ import session from 'express-session';
 import connectMongo from 'connect-mongo';
 const MongoStore = connectMongo(session);
 
+import raven from 'raven';
+
 import config from '../config';
 const app = express();
+
+// The request handler must be the first item
+app.use(raven.middleware.express.requestHandler(config.sentry.dsn));
 
 // only accept json
 app.use(bodyParser.json());
@@ -29,7 +34,6 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }));
 
-
 import authentication from './authentication';
 authentication.init(app);
 
@@ -43,6 +47,8 @@ app.use(passport.session());
 import user from './user';
 user.init(app);
 
+// The error handler must be before any other error middleware
+app.use(raven.middleware.express.errorHandler(config.sentry.dsn));
 
 // catchall pokémons
 // eslint-disable-next-line no-unused-vars
@@ -52,9 +58,6 @@ function errorHandler(err, req, res, next) {
     statusCode: 500,
     error: 'Server Internal Error',
   });
-
-  // in production, send this error to a log services (sentry, maybe)
-  console.error(err);
 }
 app.use(errorHandler);
 

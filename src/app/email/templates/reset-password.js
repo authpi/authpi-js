@@ -2,12 +2,12 @@ import handlebars from 'handlebars';
 
 const plainSource = `Hi {{displayName}},
 
-Please find new password for your Cyza account below:
+Please find new password for your AuthPI account below:
 
 {{password}}
 
 Thanks!
-- The Cyza Team
+- The AuthPI Team
 
 This e-mail has been generated automatically. Please, do not reply to this message.`;
 
@@ -15,13 +15,13 @@ const htmlSource = `<html>
 <body>
   Hi {{displayName}},
   <br/><br/>
-  Please find new password for your Cyza account below:
+  Please find new password for your AuthPI account below:
   <br/><br/>
   <pre>{{password}}</pre>
   <br/><br/>
   Thanks!
   <br/>
-  - The Cyza Team
+  - The AuthPI Team
   <br/><br/>
   <i>This e-mail has been generated automatically. Please, do not reply to this message.</i>
 </body>

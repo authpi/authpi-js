@@ -24,7 +24,7 @@
       "env": {
         "PORT": 3001,
         "NODE_ENV": "test",
-        "MONGO_STORE_URI": "mongodb://localhost:27017/cyza_test",
+        "MONGO_STORE_URI": "mongodb://localhost:27017/authpi_test",
         "MONGO_STORE_SECRET": "LJPSWW6JJWmTGfR2BmfuD77BUKhhnmy5",
         "AUTH_SECRET": "aRjXbyzSfzva3NMBx23GZX8KwGS2NbZy"
       }
@@ -34,7 +34,7 @@
       "env": {
         "PORT": 3001,
         "NODE_ENV": "test",
-        "MONGO_STORE_URI": "mongodb://localhost:27017/cyza_test",
+        "MONGO_STORE_URI": "mongodb://localhost:27017/authpi_test",
         "MONGO_STORE_SECRET": "LJPSWW6JJWmTGfR2BmfuD77BUKhhnmy5",
         "AUTH_SECRET": "aRjXbyzSfzva3NMBx23GZX8KwGS2NbZy"
       }
@@ -44,7 +44,7 @@
       "env": {
         "PORT": 3001,
         "NODE_ENV": "test",
-        "MONGO_STORE_URI": "mongodb://localhost:27017/cyza_test",
+        "MONGO_STORE_URI": "mongodb://localhost:27017/authpi_test",
         "MONGO_STORE_SECRET": "LJPSWW6JJWmTGfR2BmfuD77BUKhhnmy5",
         "AUTH_SECRET": "aRjXbyzSfzva3NMBx23GZX8KwGS2NbZy"
       }
@@ -53,7 +53,7 @@
   "engines": {
     "node": ">=6"
   },
-  "repository": "longseespace/cyzapi",
+  "repository": "longseespace/authpipi",
   "author": {
     "name": "Long Nguyen",
     "email": "long@nomadreact.com",
@@ -83,7 +83,8 @@
     "passport": "0.3.2",
     "passport-jwt": "^2.1.0",
     "passport-linkedin": "^1.0.0",
-    "rand-token": "^0.2.1"
+    "rand-token": "^0.2.1",
+    "raven": "^0.12.1"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
