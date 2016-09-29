@@ -28,24 +28,15 @@ app.use(cors());
 import mongoose from 'mongoose';
 mongoose.connect(config.mongoStore.url);
 
+// use es6 Promise (or from babel polyfill, whatever)
+// @see http://mongoosejs.com/docs/promises.html
+mongoose.Promise = Promise;
+
 // support session
 app.use(session({
   ...config.session,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }));
-
-import authentication from './authentication';
-authentication.init(app);
-
-// use es6 Promise (or from babel polyfill, whatever)
-// @see http://mongoosejs.com/docs/promises.html
-mongoose.Promise = Promise;
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-import user from './user';
-user.init(app);
 
 // The error handler must be before any other error middleware
 app.use(raven.middleware.express.errorHandler(config.sentry.dsn));
@@ -69,5 +60,14 @@ function notfoundHandler(req, res, next) {
   });
 }
 app.use(notfoundHandler);
+
+import authentication from './authentication';
+authentication.init(app);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+import user from './user';
+user.init(app);
 
 export default app;
