@@ -4,5 +4,9 @@
   "env": {
     "node": true,
     "jest": true
+  },
+  "rules": {
+    "no-param-reassign": 0,
+    "no-underscore-dangle": 0
   }
 }

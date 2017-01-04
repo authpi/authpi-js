@@ -58,7 +58,10 @@ export function handleLogin(req, res) {
 }
 
 export function handleUpdateProfile(req, res) {
-  const data = pick(req.body, ['firstName', 'lastName', 'company', 'categories', 'address1', 'address2', 'phone']);
+  const data = pick(
+    req.body,
+    ['firstName', 'lastName', 'company', 'categories', 'address1', 'address2', 'phone']
+  );
   return updateProfile(req.user.id, data)
     .then(user => res.json(user))
     .catch(() => res.boom.badImplementation());
@@ -72,7 +75,7 @@ export function handleGetProfile(req, res) {
 
 // I found this approach is more secure.
 // However, for fast development of this demo, I decided to send new password directly to the user
-// export function handleResetPassword(req, res) {
+// export function handleResetPasswordAlternative(req, res) {
 //   if (isEmpty(req.body.email)) {
 //     return res.boom.badRequest('Invalid Email');
 //   }
@@ -80,9 +83,13 @@ export function handleGetProfile(req, res) {
 //   // in production, ideally use a cron job to invalidate this token after 24hrs
 //   return createResetPasswordToken(req.body.email)
 //     .then(user =>
-//       sendPasswordRecoveryEmail({ email: user.email, displayName: user.displayName, code: user.resetPasswordToken })
-//         .then(() => res.json({ success: true }))
-//         .catch(err => res.boom.badImplementation(err.message))
+//       sendPasswordRecoveryEmail({
+//         email: user.email,
+//         displayName: user.displayName,
+//         code: user.resetPasswordToken,
+//       })
+//       .then(() => res.json({ success: true }))
+//       .catch(err => res.boom.badImplementation(err.message))
 //     )
 //     .catch(err => {
 //       if (err instanceof Error) {

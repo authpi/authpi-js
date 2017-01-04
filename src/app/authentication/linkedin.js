@@ -18,7 +18,7 @@ function linkedLogedIn(req, res) {
   findOrCreateLinkedInUser(params)
     .then(({ user, isNew }) => {
       const token = jwt.sign({
-        id: user._id,
+        id: user._id, // eslint-disable-line
       }, config.auth.secret, {
         expiresIn: '7d',
       });
@@ -33,7 +33,7 @@ function linkedLogedIn(req, res) {
 function linkedInMiddleware() {
   return (req, res, next) =>
     passport.authenticate('linkedin', (err, user) => {
-      req.user = user;
+      req.user = user; // eslint-disable-line
       next(err, user);
     })(req, res, next);
 }
@@ -46,7 +46,13 @@ export function initLinkedIn(app) {
     profileFields: ['id', 'first-name', 'last-name', 'email-address', 'headline'],
   }, linkedinVerify));
 
-  app.get('/auth/linkedin', passport.authenticate('linkedin', { scope: ['r_basicprofile', 'r_emailaddress'] }));
+  app.get(
+    '/auth/linkedin',
+    passport.authenticate(
+      'linkedin',
+      { scope: ['r_basicprofile', 'r_emailaddress'] }
+    )
+  );
   app.get('/auth/linkedin/callback', linkedInMiddleware(), linkedLogedIn);
 }
 
