@@ -4,7 +4,6 @@ import server from './server';
 import linkedin from './linkedin';
 import session from './session';
 import email from './email';
-import sentry from './sentry';
 
 export default {
   mongoStore,
@@ -13,5 +12,4 @@ export default {
   linkedin,
   session,
   email,
-  sentry,
 };
