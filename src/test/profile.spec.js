@@ -1,15 +1,14 @@
 import request from 'chakram';
-import { assert } from 'chai';
 import { testUser, removeAllUsers, addTestUser } from './helpers';
 
 describe('User Profile', () => {
   // clean collection and add a test user
-  before(done => removeAllUsers().then(addTestUser).then(done));
+  beforeAll(done => removeAllUsers().then(addTestUser).then(done));
   it('should not allow getting profile if not authenticated', () =>
     request
       .get('http://localhost:3001/users/profile')
       .then(response => {
-        assert.equal(response.response.statusCode, 401); // Unauthorize
+        expect(response.response.statusCode).toEqual(401); // Unauthorize
       })
   );
   it('should not allow updating profile if not authenticated', () =>
@@ -19,20 +18,19 @@ describe('User Profile', () => {
         lastName: 'Bot',
       })
       .then(response => {
-        assert.equal(response.response.statusCode, 401); // Unauthorize
+        expect(response.response.statusCode).toEqual(401); // Unauthorize
       })
   );
 
-  context('When authenticated', () => {
+  describe('When authenticated', () => {
     let token = '';
-    before(done =>
+    beforeAll(done =>
       request
         .post('http://localhost:3001/users/login', testUser)
         .then(response => {
           token = response.body.token;
           done();
-        })
-    );
+        }));
     it('should update profile info', () =>
       request
         .post('http://localhost:3001/users/profile', {
@@ -44,9 +42,9 @@ describe('User Profile', () => {
           },
         })
         .then(response => {
-          assert.equal(response.response.statusCode, 200);
-          assert.equal(response.body.profile.firstName, 'Test');
-          assert.equal(response.body.profile.lastName, 'Bot');
+          expect(response.response.statusCode).toEqual(200);
+          expect(response.body.profile.firstName).toEqual('Test');
+          expect(response.body.profile.lastName).toEqual('Bot');
         })
     );
     it('should return profile info', () =>
@@ -57,9 +55,9 @@ describe('User Profile', () => {
           },
         })
         .then(response => {
-          assert.equal(response.response.statusCode, 200);
-          assert.equal(response.body.profile.firstName, 'Test');
-          assert.equal(response.body.profile.lastName, 'Bot');
+          expect(response.response.statusCode).toEqual(200);
+          expect(response.body.profile.firstName).toEqual('Test');
+          expect(response.body.profile.lastName).toEqual('Bot');
         })
     );
   });

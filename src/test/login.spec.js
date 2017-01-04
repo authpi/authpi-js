@@ -1,17 +1,16 @@
 import request from 'chakram';
-import { assert } from 'chai';
 import { testUser, removeAllUsers, addTestUser } from './helpers';
 
 describe('Login', () => {
   // clean collection and add a test user
-  before(done => removeAllUsers().then(addTestUser).then(done));
+  beforeAll(done => removeAllUsers().then(addTestUser).then(done));
   it('logs user in and returns JWT token', () =>
     request
       .post('http://localhost:3001/users/login', testUser)
       .then(response => {
-        assert.equal(response.response.statusCode, 200);
-        assert.property(response.body, 'id');
-        assert.property(response.body, 'token');
+        expect(response.response.statusCode).toEqual(200);
+        expect('id' in response.body).toBeTruthy();
+        expect('token' in response.body).toBeTruthy();
       })
   );
   it('returns error if creds are incorrect', () =>
@@ -21,7 +20,7 @@ describe('Login', () => {
         password: '123',
       })
       .then(response => {
-        assert.notEqual(response.response.statusCode, 200);
+        expect(response.response.statusCode).not.toEqual(200);
       })
   );
 });
